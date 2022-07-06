@@ -1,10 +1,10 @@
-import * as Skills from "./skills"
+import { SkillName as Skills } from "./skills"
 
 type Skill = {
     name: string
 }
 
-export const SkillDetails: { [key: string]: Skill } = {
+export const SkillDetails: { [key in Skills]: Skill } = {
     [Skills.Athletics]: {
         name: 'Atletika',
     },

@@ -1,13 +1,23 @@
-import * as Races from "../races"
-import * as Skills from "../skills"
-import * as Stats from "../stats"
+import { RaceName } from "../races";
+import { SkillName } from "../skills";
+import { StatName } from "../stats";
 
-function makeList(obj: { [key: string]: string }): string[] {
-    return Object.getOwnPropertyNames(obj)
-        .filter(name => name != "__esModule")
-        .map(name => obj[name])
+
+function makeList<T, K extends keyof T>(e: T): number[] {
+    const res: number[] = []
+
+    for(const enumMember in e) {
+        const enumMemberInt = parseInt(enumMember, 10)
+        const isValueProperty = enumMemberInt >= 0
+
+        if(isValueProperty) {
+            res.push(enumMemberInt)
+        }
+    }
+
+    return res
 }
 
-export const RaceList = makeList(Races)
-export const SkillList = makeList(Skills)
-export const StatList = makeList(Stats)
+export const RaceList = makeList(RaceName)
+export const SkillList = makeList(SkillName)
+export const StatList = makeList(StatName)

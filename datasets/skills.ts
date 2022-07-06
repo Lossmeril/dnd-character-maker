@@ -1,18 +1,20 @@
-export const Athletics = "athletics";
-export const Acrobatics = "acrobatics";
-export const SleightOfHand = "sleightOfHand";
-export const Stealth = "stealth";
-export const Arcana = "arcana";
-export const History = "history";
-export const Investigation = "investigation";
-export const Nature = "nature";
-export const Religion = "religion";
-export const AnimalHandling = "animalHandling";
-export const Insight = "insight";
-export const Medicine = "medicine";
-export const Perception = "perception";
-export const Survival = "survival";
-export const Deception = "deception";
-export const Intimidation = "intimidation";
-export const Performance = "performance";
-export const Persuasion = "persuasion";
+export enum SkillName {
+    Athletics,
+    Acrobatics,
+    SleightOfHand,
+    Stealth,
+    Arcana,
+    History,
+    Investigation,
+    Nature,
+    Religion,
+    AnimalHandling,
+    Insight,
+    Medicine,
+    Perception,
+    Survival,
+    Deception,
+    Intimidation,
+    Performance,
+    Persuasion,
+}

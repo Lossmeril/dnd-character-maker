@@ -1,12 +1,12 @@
-import * as Races from "./races";
-import * as Stats from "./stats";
+import { RaceName as Races } from "./races";
+import { StatName as Stats } from "./stats";
 
 export type Race = {
     name: string
-    modifiers: [string, number][]
+    modifiers: [Stats, number][]
 }
 
-export const RaceDetails: { [key: string]: Race } = {
+export const RaceDetails: { [key in Races]: Race } = {
     [Races.Human]: {
         name: 'Člověk',
         modifiers: [

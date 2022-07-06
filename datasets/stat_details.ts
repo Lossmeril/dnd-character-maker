@@ -1,57 +1,57 @@
-import * as Stats from './stats';
-import * as Skills from './skills';
+import { StatName } from './stats';
+import { SkillName } from './skills';
 
 type Stat = {
     name: string,
-    skills: string[]
+    skills: SkillName[]
 }
 
-export const StatDetails: { [key: string]: Stat } = {
-    [Stats.Strength]: {
+export const StatDetails: { [key in StatName]: Stat } = {
+    [StatName.Strength]: {
         name: 'Síla',
         skills: [
-            Skills.Athletics
+            SkillName.Athletics
         ],
     },
-    [Stats.Dexterity]: {
+    [StatName.Dexterity]: {
         name: 'Obratnost',
         skills: [
-            Skills.Acrobatics,
-            Skills.SleightOfHand,
-            Skills.Stealth,
+            SkillName.Acrobatics,
+            SkillName.SleightOfHand,
+            SkillName.Stealth,
         ],
     },
-    [Stats.Constitution]: {
+    [StatName.Constitution]: {
         name: 'Odolnost',
         skills: [],
     },
-    [Stats.Intelligence]: {
+    [StatName.Intelligence]: {
         name: 'Inteligence',
         skills: [
-            Skills.Arcana,
-            Skills.History,
-            Skills.Investigation,
-            Skills.Nature,
-            Skills.Religion,
+            SkillName.Arcana,
+            SkillName.History,
+            SkillName.Investigation,
+            SkillName.Nature,
+            SkillName.Religion,
         ],
     },
-    [Stats.Wisdom]: {
+    [StatName.Wisdom]: {
         name: 'Moudrost',
         skills: [
-            Skills.AnimalHandling,
-            Skills.Insight,
-            Skills.Medicine,
-            Skills.Perception,
-            Skills.Survival,
+            SkillName.AnimalHandling,
+            SkillName.Insight,
+            SkillName.Medicine,
+            SkillName.Perception,
+            SkillName.Survival,
         ],
     },
-    [Stats.Charisma]: {
+    [StatName.Charisma]: {
         name: 'Charisma',
         skills: [
-            Skills.Deception,
-            Skills.Intimidation,
-            Skills.Performance,
-            Skills.Persuasion,
+            SkillName.Deception,
+            SkillName.Intimidation,
+            SkillName.Performance,
+            SkillName.Persuasion,
         ],
     },
 };
