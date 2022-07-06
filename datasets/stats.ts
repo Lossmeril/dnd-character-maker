@@ -1,4 +1,4 @@
-export enum StatName {
+export enum StatId {
     Strength,
     Dexterity,
     Constitution,

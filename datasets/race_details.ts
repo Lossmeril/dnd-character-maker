@@ -1,5 +1,5 @@
-import { RaceName as Races } from "./races";
-import { StatName as Stats } from "./stats";
+import { RaceId as Races } from "./races";
+import { StatId as Stats } from "./stats";
 
 export type Race = {
     name: string

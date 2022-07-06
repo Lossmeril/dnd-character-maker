@@ -1,4 +1,4 @@
-import { SkillName as Skills } from "./skills"
+import { SkillId as Skills } from "./skills"
 
 type Skill = {
     name: string

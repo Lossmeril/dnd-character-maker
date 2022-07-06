@@ -1,4 +1,4 @@
-export enum RaceName {
+export enum RaceId {
     Human,
     Elf,
     Dwarf,

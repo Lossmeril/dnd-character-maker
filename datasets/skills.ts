@@ -1,4 +1,4 @@
-export enum SkillName {
+export enum SkillId {
     Athletics,
     Acrobatics,
     SleightOfHand,
