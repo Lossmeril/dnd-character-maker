@@ -3,19 +3,19 @@ import * as Skills from './skills';
 
 type Stat = {
     name: string,
-    abilities: string[]
+    skills: string[]
 }
 
 export const StatDetails: { [key: string]: Stat } = {
     [Stats.Strength]: {
         name: 'Síla',
-        abilities: [
+        skills: [
             Skills.Athletics
         ],
     },
     [Stats.Dexterity]: {
         name: 'Obratnost',
-        abilities: [
+        skills: [
             Skills.Acrobatics,
             Skills.SleightOfHand,
             Skills.Stealth,
@@ -23,11 +23,11 @@ export const StatDetails: { [key: string]: Stat } = {
     },
     [Stats.Constitution]: {
         name: 'Odolnost',
-        abilities: [],
+        skills: [],
     },
     [Stats.Intelligence]: {
         name: 'Inteligence',
-        abilities: [
+        skills: [
             Skills.Arcana,
             Skills.History,
             Skills.Investigation,
@@ -37,7 +37,7 @@ export const StatDetails: { [key: string]: Stat } = {
     },
     [Stats.Wisdom]: {
         name: 'Moudrost',
-        abilities: [
+        skills: [
             Skills.AnimalHandling,
             Skills.Insight,
             Skills.Medicine,
@@ -47,7 +47,7 @@ export const StatDetails: { [key: string]: Stat } = {
     },
     [Stats.Charisma]: {
         name: 'Charisma',
-        abilities: [
+        skills: [
             Skills.Deception,
             Skills.Intimidation,
             Skills.Performance,
