@@ -3,7 +3,9 @@ import * as Skills from "../skills"
 import * as Stats from "../stats"
 
 function makeList(obj: { [key: string]: string }): string[] {
-    return Object.getOwnPropertyNames(obj).filter(name => name != "__esModule")
+    return Object.getOwnPropertyNames(obj)
+        .filter(name => name != "__esModule")
+        .map(name => obj[name])
 }
 
 export const RaceList = makeList(Races)
