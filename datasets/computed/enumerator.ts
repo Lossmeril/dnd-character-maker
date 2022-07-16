@@ -1,6 +1,7 @@
-import { RaceId } from "../races";
-import { SkillId } from "../skills";
-import { StatId } from "../stats";
+import { RaceId } from "../Races";
+import { SkillId } from "../Skills";
+import { StatId } from "../Stats";
+import { ClassId } from "../Classes";
 
 
 function makeList<T, K extends keyof T>(e: T): number[] {
@@ -21,3 +22,4 @@ function makeList<T, K extends keyof T>(e: T): number[] {
 export const RaceList = makeList(RaceId)
 export const SkillList = makeList(SkillId)
 export const StatList = makeList(StatId)
+export const ClassList = makeList(ClassId)

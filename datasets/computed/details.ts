@@ -1,6 +1,7 @@
-import { RaceDetails } from "../race_details";
-import { SkillDetails } from "../skill_details";
-import { StatDetails } from "../stat_details";
+import { RaceDetails } from "../RaceDetails";
+import { SkillDetails } from "../SkillDetails";
+import { StatDetails } from "../StatDetails";
+import { ClassDetails } from "../ClassDetails";
 
 function makeDetailFinder<V, Key extends keyof V>(data: V) {
     return (id: Key): V[Key] => {
@@ -8,6 +9,7 @@ function makeDetailFinder<V, Key extends keyof V>(data: V) {
     }
 }
 
-export const RaceDetailFinder = makeDetailFinder(RaceDetails)
-export const SkillDetailFinder = makeDetailFinder(SkillDetails)
-export const StatDetailFinder = makeDetailFinder(StatDetails)
+export const FindRaceDetail = makeDetailFinder(RaceDetails)
+export const FindSkillDetail = makeDetailFinder(SkillDetails)
+export const FindStatDetail = makeDetailFinder(StatDetails)
+export const FindClassDetail = makeDetailFinder(ClassDetails)

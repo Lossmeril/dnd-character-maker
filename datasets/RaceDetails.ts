@@ -1,5 +1,5 @@
-import { RaceId as Races } from "./races";
-import { StatId as Stats } from "./stats";
+import { RaceId as Races } from "./Races";
+import { StatId as Stats } from "./Stats";
 
 export type Race = {
     name: string
@@ -7,6 +7,7 @@ export type Race = {
 }
 
 export const RaceDetails: { [key in Races]: Race } = {
+    [Races.NOT_SELECTED]: {name: "", modifiers: []},
     [Races.Human]: {
         name: 'Člověk',
         modifiers: [
@@ -31,7 +32,7 @@ export const RaceDetails: { [key in Races]: Race } = {
         ],
     },
     [Races.Halfling]: {
-        name: 'Půlčík',
+        name: 'Pulčík',
         modifiers: [
             [Stats.Dexterity, 2],
             [Stats.Charisma, 1],

@@ -1,5 +1,5 @@
-import { StatId } from './stats';
-import { SkillId } from './skills';
+import { StatId } from './Stats';
+import { SkillId } from './Skills';
 
 type Stat = {
     name: string,
