@@ -1,14 +1,18 @@
 import { ClassId } from "./Classes";
+import { AbilityId } from "./Ability";
 
 export type Class = {
-    name: string
+    name: string,
+    abilities: AbilityId[]
 }
 
 export const ClassDetails: { [key in ClassId]: Class } = {
     [ClassId.Warrior]: {
-        name: "Válečník"
+        name: "Válečník",
+        abilities: [AbilityId.Fly]
     },
     [ClassId.Bard]: {
-        name: "Bard"
+        name: "Bard",
+        abilities: [AbilityId.Sing]
     }
 }

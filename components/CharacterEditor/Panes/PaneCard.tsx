@@ -23,7 +23,7 @@ const PaneCard = ({title, children}: PaneCardProps) => {
             >
                 <Heading as="h3">{title}</Heading>
 
-                <Box mt={6}>
+                <Box mt={6} height="100%">
                     {children}
                 </Box>
                 <Box>

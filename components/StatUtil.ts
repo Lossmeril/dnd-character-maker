@@ -1,4 +1,4 @@
-const CalculateStatModifier = (statLevel: number): number => {
+export const CalculateStatModifier = (statLevel: number): number => {
     switch(statLevel) {
         case 1: return -5;
         case 2: return -4;
@@ -34,4 +34,9 @@ const CalculateStatModifier = (statLevel: number): number => {
     }
 }
 
-export default CalculateStatModifier
+export const GetStatPointCost = (points: number): number => {
+    if(points >= 8 && points <= 13) return points - 8;
+    if(points == 14) return 7;
+    if(points == 15) return 9;
+    throw new Error("invalid distributable points")
+}

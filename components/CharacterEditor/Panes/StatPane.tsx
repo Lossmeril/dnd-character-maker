@@ -1,47 +1,55 @@
 import { EditorPane } from "./EditorPane";
 import PaneCard from "./PaneCard";
-import { FindStatDetail } from "../../../datasets/computed/details";
+import { FindRaceDetail, FindStatDetail } from "../../../datasets/computed/details";
 import { StatList } from "../../../datasets/computed/enumerator";
 import {
     Box,
-    Button,
+    Button, Center,
     Flex,
     Slider,
     SliderFilledTrack,
-    SliderMark,
     SliderThumb,
-    SliderTrack,
+    SliderTrack, Stack,
     Text, Tooltip
 } from "@chakra-ui/react";
 import { StatId } from "../../../datasets/Stats";
 import {
     calculateDistributedPoints,
-    calculateTotalDistributablePoints,
     Character,
+    CHARACTER_BASE_DISTRIBUTABLE_POINTS, DEFAULT_STAT_VALUE,
     defaultStatMap
 } from "../../Character";
 import Bold from "../../Bold";
 import { useState } from "react";
+import { Race } from "../../../datasets/RaceDetails";
+import { CalculateStatModifier } from "../../StatUtil";
+
 
 type StatSliderProps = {
     statId: StatId,
     character: Character,
+    race: Race, // optimization to prevent duplicate lookups
     onStatChange: (newValue: number) => void
 }
 
 const StatSlider = ({statId, character, onStatChange}: StatSliderProps) => {
     const stat = FindStatDetail(statId)
     const statValue = character.stats[statId]
+    const race = FindRaceDetail(character.race)
 
     const [showTooltip, setShowTooltip] = useState(false)
+
+    const statModifier = CalculateStatModifier(statValue)
 
     return (
         <Box>
             <Flex justifyContent="space-between">
                 <Text>{stat.name}</Text>
-                <Text><Bold>{statValue}</Bold></Text>
+                <Text>
+                    <Bold>{statValue} ({statModifier >= 0 ? `+${statModifier}` : `${statModifier}`})</Bold>
+                </Text>
             </Flex>
-            <Slider step={1} min={1} max={20}
+            <Slider step={1} min={8} max={15}
                     value={statValue}
                     colorScheme="teal"
                     onMouseEnter={() => setShowTooltip(true)}
@@ -67,13 +75,14 @@ const StatSlider = ({statId, character, onStatChange}: StatSliderProps) => {
 }
 
 const StatPane: EditorPane = ({character, onCharacterModified}) => {
-    const totalDistributablePoints = calculateTotalDistributablePoints(character)
+    const race = FindRaceDetail(character.race)
+    const totalDistributablePoints = CHARACTER_BASE_DISTRIBUTABLE_POINTS
     const alreadyDistributedPoints = calculateDistributedPoints(character)
 
     const resetStats = () => {
         onCharacterModified({
             ...character,
-            stats: defaultStatMap()
+            stats: defaultStatMap(DEFAULT_STAT_VALUE)
         })
     }
 
@@ -101,6 +110,7 @@ const StatPane: EditorPane = ({character, onCharacterModified}) => {
                 (<StatSlider
                     key={statId}
                     character={character}
+                    race={race}
                     statId={statId}
                     onStatChange={changeStat(statId)}
                 ></StatSlider>)

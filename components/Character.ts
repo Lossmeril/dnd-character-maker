@@ -3,9 +3,12 @@ import { ClassId } from "../datasets/Classes";
 import { v4 as uuid } from "uuid"
 import { SexId } from "../datasets/Sex";
 import { StatId } from "../datasets/Stats";
-import { StatList } from "../datasets/computed/enumerator";
+import { ClassList, StatList } from "../datasets/computed/enumerator";
+import { GetStatPointCost } from "./StatUtil";
+import _ from "lodash";
 
 type StatMap = { [stat in StatId]: number }
+type ClassMap = { [_class in ClassId]: number }
 
 export type Character = {
     /**
@@ -27,13 +30,13 @@ export type Character = {
     /**
      * Classes of the character
      */
-    classes: ClassId[]
+    classes: ClassMap
     /**
      * Integer representing level of this character
      */
     level: number
     /**
-     * Stat map
+     * Stat map of initial bought stats
      *
      * @note Stat values are recorded without racial bonuses
      */
@@ -41,23 +44,26 @@ export type Character = {
 }
 
 export const DEFAULT_STAT_VALUE = 8
-export const BASE_CHARACTER_DISTRIBUTABLE_POINTS = 10
+export const CHARACTER_BASE_DISTRIBUTABLE_POINTS = 27
 
-export const calculateTotalDistributablePoints = ({level}: Character): number =>
-    BASE_CHARACTER_DISTRIBUTABLE_POINTS + level
-
-export const calculateDistributedPoints = (character: Character): number => {
+export const calculateDistributedPoints = ({stats}: Character): number => {
     let result = 0;
     for(const statId of StatList) {
-        result += character.stats[statId as StatId] - DEFAULT_STAT_VALUE
+        result += GetStatPointCost(stats[statId as StatId])
     }
     return result
 }
 
-export const defaultStatMap = (): StatMap => <StatMap><unknown>StatList.reduce((prev, statId) => ({
+export const calculateSpentClassPoints = ({classes}: Character): number =>
+    _(classes).values().sum()
+
+const defaultMap = <T, K>(list: T[]) => (defaultValue: number) => <K><unknown>list.reduce((prev, id) => ({
     ...prev,
-    [statId]: DEFAULT_STAT_VALUE
-}), {})
+    [<any>id]: defaultValue
+}), <K>{})
+
+export const defaultStatMap = defaultMap<StatId, StatMap>(StatList)
+export const defaultClassMap = defaultMap<ClassId, ClassMap>(ClassList)
 
 export const emptyCharacter = (): Character => ({
     id: uuid(),
@@ -68,7 +74,7 @@ export const emptyCharacter = (): Character => ({
     level: 3,
 
     race: RaceId.NOT_SELECTED,
-    classes: [],
+    classes: defaultClassMap(0),
 
-    stats: defaultStatMap()
+    stats: defaultStatMap(DEFAULT_STAT_VALUE),
 })
