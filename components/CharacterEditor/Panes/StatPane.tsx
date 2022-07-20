@@ -22,7 +22,7 @@ import {
 import Bold from "../../Bold";
 import { useState } from "react";
 import { Race } from "../../../datasets/RaceDetails";
-import { CalculateStatModifier } from "../../StatUtil";
+import { CalculateStatModifier, GetStatPointCost } from "../../StatUtil";
 
 
 type StatSliderProps = {
@@ -88,8 +88,14 @@ const StatPane: EditorPane = ({character, onCharacterModified}) => {
     const changeStat = (statId: StatId) => (newValue: number) => {
         const valueDelta = newValue - character.stats[statId]
 
+        // only validate if user adds points to a stat
         if(valueDelta > 0) {
-            if(alreadyDistributedPoints + valueDelta > totalDistributablePoints) {
+            const newDistributedPoints =
+                alreadyDistributedPoints
+                + GetStatPointCost(newValue)
+                - GetStatPointCost(character.stats[statId])
+
+            if(newDistributedPoints > totalDistributablePoints) {
                 return;
             }
         }
