@@ -1,12 +1,18 @@
 import React from "react";
-import { Box, Container, Heading } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Heading, HStack } from "@chakra-ui/react";
 
 type PaneCardProps = {
     title: string,
-    children: React.ReactNode
+    children: React.ReactNode,
+
+    onNavigateBack?: () => void,
+    onNavigateForward?: () => void,
 }
 
-const PaneCard = ({title, children}: PaneCardProps) => {
+const PaneCard = ({
+                      title, children,
+                      onNavigateBack = undefined, onNavigateForward = undefined,
+                  }: PaneCardProps) => {
     return (
         // <Container mt="4%" height="90%">
         <Box
@@ -23,12 +29,17 @@ const PaneCard = ({title, children}: PaneCardProps) => {
             >
                 <Heading as="h3">{title}</Heading>
 
-                <Box mt={6} height="100%">
-                    {children}
-                </Box>
-                <Box>
-
-                </Box>
+                <Flex
+                    height="92%"
+                    direction="column" justifyContent="space-between">
+                    <Box mt={6} height="100%">
+                        {children}
+                    </Box>
+                    <HStack mt={4} spacing={1}>
+                        {onNavigateBack && <Button onClick={onNavigateBack}>Back</Button>}
+                        {onNavigateForward && <Button onClick={onNavigateForward} colorScheme="blue">Next</Button>}
+                    </HStack>
+                </Flex>
             </Box>
         </Box>
         // </Container>

@@ -22,12 +22,15 @@ const RaceInfo = ({race}: RaceInfoProps) => {
                     <ListItem key={i}>{formatAmount(howMuch)} {FindStatDetail(statId).name}</ListItem>
                 ))}
             </UnorderedList>
-        {/*    TODO: insert random text*/}
+            {/*    TODO: insert random text*/}
         </>
     )
 }
 
-const RacePane: EditorPane = ({character, onCharacterModified}) => {
+const RacePane: EditorPane = ({
+                                  character, onCharacterModified,
+                                  onNavigateBack, onNavigateForward
+                              }) => {
     const races = RaceList.map(FindRaceDetail)
 
     const onRaceChanged = (index: number) => {
@@ -35,7 +38,8 @@ const RacePane: EditorPane = ({character, onCharacterModified}) => {
     }
 
     return (
-        <PaneCard title="Race">
+        <PaneCard title="Race"
+                  onNavigateBack={onNavigateBack} onNavigateForward={onNavigateForward}>
             <Tabs defaultIndex={character.race} onChange={onRaceChanged}>
                 <TabList>
                     {races.map((race, i) =>

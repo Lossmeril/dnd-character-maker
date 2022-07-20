@@ -19,9 +19,9 @@ const OverviewField = ({label, children}: OverviewFieldProps) => (
     </Box>
 )
 
-const OverviewPane: EditorPane = ({character}) => {
+const OverviewPane: EditorPane = ({character, onNavigateBack}) => {
     return (
-        <PaneCard title="Overview">
+        <PaneCard title="Overview" onNavigateBack={onNavigateBack}>
             <OverviewField label="Jméno">{character.name}</OverviewField>
             <OverviewField label="Pohlaví">{FindSexDetail(character.sex).name}</OverviewField>
             <OverviewField label="Rasa">{FindRaceDetail(character.race).name}</OverviewField>

@@ -1,7 +1,10 @@
 import type { NextPage } from 'next'
 import NextLink from "next/link"
 import Head from 'next/head'
-import { Box, Center, Container, Divider, Flex, Heading, Link, Text, VStack } from "@chakra-ui/react";
+import { Box, Center, Container, Divider, Flex, Heading, Link, List, ListItem, Text, VStack } from "@chakra-ui/react";
+import useCharacterStore from "../components/CharacterStore";
+import _ from "lodash"
+import { Character } from "../components/Character";
 
 const CharacterCreatorLink = () => (
     <NextLink href="/character_creator" passHref>
@@ -9,8 +12,21 @@ const CharacterCreatorLink = () => (
     </NextLink>
 )
 
+type CharacterEditorLinkProps = {
+    character: Character
+}
+
+const CharacterEditorLink = ({character: {id, name}}: CharacterEditorLinkProps) => (
+    <NextLink href={"/character_editor/" + id} passHref>
+        <Link color="teal.500">{name}</Link>
+    </NextLink>
+)
+
 const Home: NextPage = () => {
     const title = "DnD Character Maker"
+
+    const [characterStore, __] = useCharacterStore()
+    const characters = _(characterStore).entries().value()
 
     return (
         <>
@@ -42,12 +58,26 @@ const Home: NextPage = () => {
 
                     {/*Display characters*/}
                     <Box p={6}>
-                        <Center>
-                            <VStack>
-                                <Text>Nuffin here :(</Text>
-                                <CharacterCreatorLink/>
-                            </VStack>
-                        </Center>
+                        {
+                            characters.length == 0 && <Center>
+                                <VStack>
+                                    <Text>Nuffin here :(</Text>
+                                    <CharacterCreatorLink/>
+                                </VStack>
+                            </Center>
+                        }
+                        {
+                            characters.length > 0 &&
+                            <List>
+                                {
+                                    characters.map(([id, character]) => (
+                                        <ListItem key={id}>
+                                            <CharacterEditorLink character={character}/>
+                                        </ListItem>
+                                    ))
+                                }
+                            </List>
+                        }
                     </Box>
                 </Box>
             </Container>

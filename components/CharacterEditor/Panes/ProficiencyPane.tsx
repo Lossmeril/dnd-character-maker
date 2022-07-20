@@ -8,7 +8,10 @@ import Bold from "../../Bold";
 import ManySelect from "../../ManySelect";
 
 
-const ProficiencyPane: EditorPane = ({character, onCharacterModified}) => {
+const ProficiencyPane: EditorPane = ({
+                                         character, onCharacterModified,
+                                         onNavigateBack, onNavigateForward
+                                     }) => {
     const availableProficiencies =
         getAvailableProficiencies(character)
 
@@ -29,7 +32,8 @@ const ProficiencyPane: EditorPane = ({character, onCharacterModified}) => {
     }
 
     return (
-        <PaneCard title="Proficiency">
+        <PaneCard title="Proficiency"
+                  onNavigateBack={onNavigateBack} onNavigateForward={onNavigateForward}>
             <Wrap>
                 {availableProficiencies.map(skillId => {
                     const skill = FindSkillDetail(skillId)

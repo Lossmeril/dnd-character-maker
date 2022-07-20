@@ -8,6 +8,7 @@ import { GetStatPointCost } from "./StatUtil";
 import _ from "lodash";
 import { FindClassDetail, FindRaceDetail } from "../datasets/computed/details";
 import { SkillId } from "../datasets/Skills";
+import { SpecialAbilityId } from "../datasets/SpecialAbility";
 
 type StatMap = { [stat in StatId]: number }
 type ClassMap = { [_class in ClassId]: number }
@@ -47,6 +48,10 @@ export type Character = {
      * List of skills character is proficient in
      */
     proficiencies: SkillId[]
+    /**
+     * List of characters special abilities
+     */
+    specialAbilities: SpecialAbilityId[]
 }
 
 export const DEFAULT_STAT_VALUE = 8
@@ -82,6 +87,15 @@ export const getAvailableProficiencies = ({classes}: Character): SkillId[] =>
         .flatMap(class_ => class_.availableProficiencies)
         .value()
 
+export const getAvailableSpecialAbilities = ({classes}: Character): SpecialAbilityId[] =>
+    _(classes)
+        .entries()
+        .filter(([_, value]) => value > 0)
+        .map(([classId, _]) => classId as unknown as number)
+        .map(id => FindClassDetail(id))
+        .flatMap(class_ => class_.availableSpecialAbilities)
+        .value()
+
 const defaultMap = <T, K>(list: T[]) => (defaultValue: number) => <K><unknown>list.reduce((prev, id) => ({
     ...prev,
     [<any>id]: defaultValue
@@ -102,5 +116,6 @@ export const emptyCharacter = (): Character => ({
     classes: defaultClassMap(0),
 
     stats: defaultStatMap(DEFAULT_STAT_VALUE),
-    proficiencies: []
+    proficiencies: [],
+    specialAbilities: []
 })

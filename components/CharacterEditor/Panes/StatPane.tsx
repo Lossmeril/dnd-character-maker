@@ -21,7 +21,6 @@ import {
 } from "../../Character";
 import Bold from "../../Bold";
 import { useState } from "react";
-import { Race } from "../../../datasets/RaceDetails";
 import { CalculateStatModifier, GetStatPointCost } from "../../StatUtil";
 
 
@@ -74,7 +73,10 @@ const StatSlider = ({statId, character, onStatChange}: StatSliderProps) => {
     )
 }
 
-const StatPane: EditorPane = ({character, onCharacterModified}) => {
+const StatPane: EditorPane = ({
+                                  character, onCharacterModified,
+                                  onNavigateBack, onNavigateForward
+                              }) => {
     const totalDistributablePoints = CHARACTER_BASE_DISTRIBUTABLE_POINTS
     const alreadyDistributedPoints = calculateDistributedPoints(character)
 
@@ -110,7 +112,8 @@ const StatPane: EditorPane = ({character, onCharacterModified}) => {
     }
 
     return (
-        <PaneCard title="Stats">
+        <PaneCard title="Stats"
+                  onNavigateBack={onNavigateBack} onNavigateForward={onNavigateForward}>
             {StatList.map((statId) =>
                 (<StatSlider
                     key={statId}

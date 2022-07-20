@@ -50,14 +50,17 @@ const SexSelect = ({currentSex, onSexChanged}: SexSelectProps) => {
     )
 }
 
-const NameSexPane: EditorPane = ({character, onCharacterModified}) => {
+const NameSexPane: EditorPane = ({
+                                     character, onCharacterModified,
+                                     onNavigateForward
+                                 }) => {
     const setName = (newName: string) =>
         onCharacterModified({...character, name: newName})
     const setSex = (newSex: SexId) =>
         onCharacterModified({...character, sex: newSex})
 
     return (
-        <PaneCard title="Sex && Name">
+        <PaneCard title="Sex && Name" onNavigateForward={onNavigateForward}>
             <FormControl>
                 <FormLabel htmlFor='name'>Name</FormLabel>
                 <Input

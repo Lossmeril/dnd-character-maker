@@ -69,7 +69,10 @@ const ClassCard = ({classId, level, onLevelChange}: ClassCardProps) => {
     )
 }
 
-const ClassPane: EditorPane = ({character, onCharacterModified}) => {
+const ClassPane: EditorPane = ({
+                                   character, onCharacterModified,
+                                   onNavigateBack, onNavigateForward
+                               }) => {
     const spentPoints = calculateSpentClassPoints(character)
 
     const onLevelChange = (classId: ClassId, oldLevel: number) => (newLevel: number) => {
@@ -97,7 +100,7 @@ const ClassPane: EditorPane = ({character, onCharacterModified}) => {
     }
 
     return (
-        <PaneCard title="Class">
+        <PaneCard title="Class" onNavigateBack={onNavigateBack} onNavigateForward={onNavigateForward}>
             <Flex direction={{base: "column", sm: "row"}} gap={4}>
                 {ClassList.map(classId => {
                     const currentLevel = character.classes[classId as ClassId]
