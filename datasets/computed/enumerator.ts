@@ -3,6 +3,7 @@ import { SkillId } from "../Skills";
 import { StatId } from "../Stats";
 import { ClassId } from "../Classes";
 import { AbilityId } from "../Ability";
+import { SexId } from "../Sex";
 
 
 function makeList<T, K extends keyof T>(e: T): number[] {
@@ -25,3 +26,4 @@ export const SkillList = makeList(SkillId)
 export const StatList = makeList(StatId)
 export const ClassList = makeList(ClassId)
 export const AbilityList = makeList(AbilityId)
+export const SexList = makeList(SexId)

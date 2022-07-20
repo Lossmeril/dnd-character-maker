@@ -1,4 +1,9 @@
-import { Character } from "../Character";
+import {
+    calculateDistributedPoints,
+    calculateSpentClassPoints,
+    Character,
+    CHARACTER_BASE_DISTRIBUTABLE_POINTS
+} from "../Character";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 import PhaseOverview from "./PhaseOverview";
 import { CharacterEditorPhase } from "./Phases";
@@ -8,6 +13,9 @@ import RacePane from "./Panes/RacePane";
 import ClassPane from "./Panes/ClassPane";
 import usePersistentState from "../PersistentPane";
 import StatPane from "./Panes/StatPane";
+import ProficiencyPane from "./Panes/ProficiencyPane";
+import OverviewPane from "./Panes/OverviewPane";
+import NOT_SELECTED_ID from "../../datasets/NotSelected";
 
 type CharacterEditorProps = {
     character: Character,
@@ -24,7 +32,16 @@ const CharacterEditor = ({character, onCharacterModified}: CharacterEditorProps)
         [CharacterEditorPhase.Class]: ClassPane,
         [CharacterEditorPhase.Skill]: () => (<></>),
         [CharacterEditorPhase.Stat]: StatPane,
+        [CharacterEditorPhase.Proficiency]: ProficiencyPane,
+        [CharacterEditorPhase.Overview]: OverviewPane,
     }
+
+    const nameSexGood = character.name.length > 0 && character.sex != NOT_SELECTED_ID
+    const raceGood = character.race != NOT_SELECTED_ID
+    const statsGood = (calculateDistributedPoints(character) - CHARACTER_BASE_DISTRIBUTABLE_POINTS) === 0
+    const classGood = calculateSpentClassPoints(character) == character.level
+    const proficiencyGood = character.proficiencies.length == character.level
+    const allGood = nameSexGood && raceGood && statsGood && classGood && proficiencyGood
 
     return (
         <Grid
@@ -53,7 +70,15 @@ const CharacterEditor = ({character, onCharacterModified}: CharacterEditorProps)
                       px={4}
                 // @ts-ignore tis correct
                       margin={{base: null, md: "auto"}}>
-                <PhaseOverview character={character} onPhaseSelected={setCurrentPhase}/>
+                <PhaseOverview
+                    nameSexGood={nameSexGood}
+                    raceGood={raceGood}
+                    statsGood={statsGood}
+                    classGood={classGood}
+                    proficiencyGood={proficiencyGood}
+                    allGood={allGood}
+                    onPhaseSelected={setCurrentPhase}
+                />
             </GridItem>
         </Grid>
     )

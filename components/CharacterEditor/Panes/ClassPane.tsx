@@ -1,10 +1,10 @@
 import { EditorPane } from "./EditorPane";
 import PaneCard from "./PaneCard";
 import { ClassList } from "../../../datasets/computed/enumerator";
-import { Box, Button, Divider, Flex, Heading, HStack, Input, Text, useNumberInput} from "@chakra-ui/react";
+import { Box, Button, Divider, Flex, Heading, HStack, Input, Text, useNumberInput } from "@chakra-ui/react";
 import { FindAbilityDetail, FindClassDetail } from "../../../datasets/computed/details";
 import { ClassId } from "../../../datasets/Classes";
-import { calculateSpentClassPoints } from "../../Character";
+import { calculateSpentClassPoints, getAvailableProficiencies } from "../../Character";
 import Bold from "../../Bold";
 
 type CardNumberInputProps = {
@@ -77,16 +77,25 @@ const ClassPane: EditorPane = ({character, onCharacterModified}) => {
             return;
         }
 
-        onCharacterModified({
+        const newCharacter = {
             ...character,
             classes: {
                 ...character.classes,
                 [classId]: newLevel
             }
+        }
+
+        const availableProficiencies = getAvailableProficiencies(newCharacter)
+
+        onCharacterModified({
+            ...newCharacter,
+            proficiencies:
+                character
+                    .proficiencies
+                    .filter(skillId => availableProficiencies.includes(skillId))
         })
     }
 
-    console.log(character.classes)
     return (
         <PaneCard title="Class">
             <Flex direction={{base: "column", sm: "row"}} gap={4}>

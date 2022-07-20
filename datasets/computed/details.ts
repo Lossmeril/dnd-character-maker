@@ -3,6 +3,7 @@ import { SkillDetails } from "../SkillDetails";
 import { StatDetails } from "../StatDetails";
 import { ClassDetails } from "../ClassDetails";
 import { AbilityDetails } from "../AbilityDetails";
+import { SexDetails } from "../SexDetails";
 
 function makeDetailFinder<V, Key extends keyof V>(data: V) {
     return (id: Key): V[Key] => {
@@ -15,3 +16,4 @@ export const FindSkillDetail = makeDetailFinder(SkillDetails)
 export const FindStatDetail = makeDetailFinder(StatDetails)
 export const FindClassDetail = makeDetailFinder(ClassDetails)
 export const FindAbilityDetail = makeDetailFinder(AbilityDetails)
+export const FindSexDetail = makeDetailFinder(SexDetails)

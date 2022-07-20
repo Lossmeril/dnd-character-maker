@@ -4,5 +4,7 @@ export enum CharacterEditorPhase {
     Race,
     Class,
     Stat,
-    Skill
+    Skill,
+    Proficiency,
+    Overview
 }

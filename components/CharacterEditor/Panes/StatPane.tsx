@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { StatId } from "../../../datasets/Stats";
 import {
-    calculateDistributedPoints,
+    calculateDistributedPoints, calculateResultStatValue,
     Character,
     CHARACTER_BASE_DISTRIBUTABLE_POINTS, DEFAULT_STAT_VALUE,
     defaultStatMap
@@ -28,25 +28,25 @@ import { CalculateStatModifier } from "../../StatUtil";
 type StatSliderProps = {
     statId: StatId,
     character: Character,
-    race: Race, // optimization to prevent duplicate lookups
     onStatChange: (newValue: number) => void
 }
 
 const StatSlider = ({statId, character, onStatChange}: StatSliderProps) => {
     const stat = FindStatDetail(statId)
     const statValue = character.stats[statId]
-    const race = FindRaceDetail(character.race)
 
     const [showTooltip, setShowTooltip] = useState(false)
 
-    const statModifier = CalculateStatModifier(statValue)
+    const resultStatValue = calculateResultStatValue(character, statId)
+
+    const statModifier = CalculateStatModifier(resultStatValue)
 
     return (
         <Box>
             <Flex justifyContent="space-between">
                 <Text>{stat.name}</Text>
                 <Text>
-                    <Bold>{statValue} ({statModifier >= 0 ? `+${statModifier}` : `${statModifier}`})</Bold>
+                    <Bold>{resultStatValue} ({statModifier >= 0 ? `+${statModifier}` : `${statModifier}`})</Bold>
                 </Text>
             </Flex>
             <Slider step={1} min={8} max={15}
@@ -75,7 +75,6 @@ const StatSlider = ({statId, character, onStatChange}: StatSliderProps) => {
 }
 
 const StatPane: EditorPane = ({character, onCharacterModified}) => {
-    const race = FindRaceDetail(character.race)
     const totalDistributablePoints = CHARACTER_BASE_DISTRIBUTABLE_POINTS
     const alreadyDistributedPoints = calculateDistributedPoints(character)
 
@@ -110,7 +109,6 @@ const StatPane: EditorPane = ({character, onCharacterModified}) => {
                 (<StatSlider
                     key={statId}
                     character={character}
-                    race={race}
                     statId={statId}
                     onStatChange={changeStat(statId)}
                 ></StatSlider>)

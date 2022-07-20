@@ -6,6 +6,8 @@ import { StatId } from "../datasets/Stats";
 import { ClassList, StatList } from "../datasets/computed/enumerator";
 import { GetStatPointCost } from "./StatUtil";
 import _ from "lodash";
+import { FindClassDetail, FindRaceDetail } from "../datasets/computed/details";
+import { SkillId } from "../datasets/Skills";
 
 type StatMap = { [stat in StatId]: number }
 type ClassMap = { [_class in ClassId]: number }
@@ -41,6 +43,10 @@ export type Character = {
      * @note Stat values are recorded without racial bonuses
      */
     stats: StatMap
+    /**
+     * List of skills character is proficient in
+     */
+    proficiencies: SkillId[]
 }
 
 export const DEFAULT_STAT_VALUE = 8
@@ -56,6 +62,25 @@ export const calculateDistributedPoints = ({stats}: Character): number => {
 
 export const calculateSpentClassPoints = ({classes}: Character): number =>
     _(classes).values().sum()
+
+export const calculateResultStatValue = ({race, stats}: Character, statId: StatId): number => {
+    const baseValue = stats[statId];
+    const modifiers = _(FindRaceDetail(race).modifiers)
+        .filter(([thiStatId, _]) => thiStatId == statId)
+        .map(([_, howMuch]) => howMuch)
+        .first() ?? 0
+
+    return baseValue + modifiers
+}
+
+export const getAvailableProficiencies = ({classes}: Character): SkillId[] =>
+    _(classes)
+        .entries()
+        .filter(([_, value]) => value > 0)
+        .map(([classId, _]) => classId as unknown as number)
+        .map(id => FindClassDetail(id))
+        .flatMap(class_ => class_.availableProficiencies)
+        .value()
 
 const defaultMap = <T, K>(list: T[]) => (defaultValue: number) => <K><unknown>list.reduce((prev, id) => ({
     ...prev,
@@ -77,4 +102,5 @@ export const emptyCharacter = (): Character => ({
     classes: defaultClassMap(0),
 
     stats: defaultStatMap(DEFAULT_STAT_VALUE),
+    proficiencies: []
 })

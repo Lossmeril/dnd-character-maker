@@ -29,15 +29,22 @@ const PhaseLine = ({ok, name, onClick}: PhaseLineProps) => (
 )
 
 type PhaseOverviewProps = {
-    character: Character,
     onPhaseSelected: (phase: CharacterEditorPhase) => void
+    nameSexGood: boolean,
+    raceGood: boolean,
+    statsGood: boolean,
+    classGood: boolean,
+    proficiencyGood: boolean,
+    allGood: boolean,
 }
 
-const PhaseOverview = ({character, onPhaseSelected = () => null}: PhaseOverviewProps) => {
-    const nameSexGood = character.name.length > 0 && character.sex != NOT_SELECTED_ID
-    const raceGood = character.race != NOT_SELECTED_ID
-    const statsGood = (calculateDistributedPoints(character) - CHARACTER_BASE_DISTRIBUTABLE_POINTS) === 0
-    const classGood = calculateSpentClassPoints(character) == character.level
+const PhaseOverview = ({
+                           nameSexGood, raceGood,
+                           statsGood, classGood,
+                           proficiencyGood, allGood,
+                           onPhaseSelected = () => null
+                       }: PhaseOverviewProps) => {
+
 
     const selectPhase = (phase: CharacterEditorPhase) => () => onPhaseSelected(phase)
 
@@ -63,6 +70,12 @@ const PhaseOverview = ({character, onPhaseSelected = () => null}: PhaseOverviewP
                 <PhaseLine ok={classGood}
                            name={"Class"}
                            onClick={selectPhase(CharacterEditorPhase.Class)}></PhaseLine>
+                <PhaseLine ok={proficiencyGood}
+                           name={"Proficiency"}
+                           onClick={selectPhase(CharacterEditorPhase.Proficiency)}></PhaseLine>
+                <PhaseLine ok={allGood}
+                           name={"Overview"}
+                           onClick={selectPhase(CharacterEditorPhase.Overview)}></PhaseLine>
             </List>
         </Container>
     )
