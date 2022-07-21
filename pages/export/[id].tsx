@@ -5,7 +5,8 @@ import useCharacterStore from "../../components/CharacterStore";
 import Head from "next/head";
 import CharacterEditorComponent from "../../components/CharacterEditor/CharacterEditor";
 import NextLink from "next/link";
-import { Link } from "@chakra-ui/react";
+import { Box, Button, Link, Wrap } from "@chakra-ui/react";
+import CharacterOverview from "../../components/CharacterOverview";
 
 const CharacterEditor = () => {
     const router = useRouter()
@@ -31,30 +32,28 @@ const CharacterEditor = () => {
         );
     }
 
-    const saveAndReturnToIndex = () => {
-        setCharacterStore({
-            ...characterStore,
-            [character.id]: character
-        })
-        router.replace("/").then(r => void r)
-    }
-
-    const updateCharacter = (newCharacter: Character) => {
-        setCharacterStore({
-            ...characterStore,
-            [character.id]: newCharacter
-        })
-    }
-
     return (
         <>
             <Head>
                 <title>DnD Character Maker - Editor</title>
                 <meta name="description" content={`Edit character ${character.name}`}/>
             </Head>
-            <CharacterEditorComponent
-                character={character} onCharacterModified={updateCharacter}
-                onComplete={saveAndReturnToIndex}/>
+            <Box m={4}>
+                <CharacterOverview character={character}/>
+                <Wrap mt={4}
+                      spacing={4}
+                      sx={{
+                          '@media print': {
+                              display: 'none',
+                          },
+                      }}
+                >
+                    <NextLink href="/" passHref>
+                        <Button>Back</Button>
+                    </NextLink>
+                    <Button colorScheme="blue" onClick={() => window.print()}>Print</Button>
+                </Wrap>
+            </Box>
         </>
     )
 }

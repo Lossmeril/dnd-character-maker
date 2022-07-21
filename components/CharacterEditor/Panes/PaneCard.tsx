@@ -22,7 +22,9 @@ const PaneCard = ({
             my="4%"
         >
             <Box
-                borderWidth='1px' borderRadius='lg' overflow='hidden'
+                borderWidth='1px' borderRadius='lg'
+                overflowX='hidden'
+                overflowY="scroll"
                 p={6}
                 boxSizing="border-box"
                 height="100%"

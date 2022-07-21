@@ -1,7 +1,20 @@
 import type { NextPage } from 'next'
 import NextLink from "next/link"
 import Head from 'next/head'
-import { Box, Center, Container, Divider, Flex, Heading, Link, List, ListItem, Text, VStack } from "@chakra-ui/react";
+import {
+    Box,
+    Button,
+    Center,
+    Container,
+    Divider,
+    Flex,
+    Heading,
+    Link,
+    List,
+    ListItem,
+    Text,
+    VStack
+} from "@chakra-ui/react";
 import useCharacterStore from "../components/CharacterStore";
 import _ from "lodash"
 import { Character } from "../components/Character";
@@ -12,13 +25,19 @@ const CharacterCreatorLink = () => (
     </NextLink>
 )
 
-type CharacterEditorLinkProps = {
+type CharacterLinkProps = {
     character: Character
 }
 
-const CharacterEditorLink = ({character: {id, name}}: CharacterEditorLinkProps) => (
+const CharacterEditorLink = ({character: {id, name}}: CharacterLinkProps) => (
     <NextLink href={"/character_editor/" + id} passHref>
         <Link color="teal.500">{name}</Link>
+    </NextLink>
+)
+
+const PrintLink = ({character: {id, name}}: CharacterLinkProps) => (
+    <NextLink href={"/export/" + id} passHref>
+        <Button size="sm">Export</Button>
     </NextLink>
 )
 
@@ -43,7 +62,7 @@ const Home: NextPage = () => {
                 </Center>
                 <Box
                     borderWidth='1px' borderRadius='lg' overflow='hidden'
-                    marginTop={6} pt={1} paddingX={2}>
+                    marginTop={6} pt={1} paddingX={4}>
 
                     <Box display="flex" justifyContent="space-between">
                         <Box
@@ -71,8 +90,12 @@ const Home: NextPage = () => {
                             <List>
                                 {
                                     characters.map(([id, character]) => (
-                                        <ListItem key={id}>
-                                            <CharacterEditorLink character={character}/>
+                                        <ListItem key={id} mt={2}>
+                                            <Flex
+                                                justifyContent="space-between">
+                                                <CharacterEditorLink character={character}/>
+                                                <PrintLink character={character}></PrintLink>
+                                            </Flex>
                                         </ListItem>
                                     ))
                                 }
