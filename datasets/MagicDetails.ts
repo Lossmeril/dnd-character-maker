@@ -13,14 +13,14 @@ export type PointBased = {
 export const MagicDetails: {
   [key in MagicId]: StatBased | PointBased;
 } = {
+  [MagicId.Charisma]: {
+    castStat: StatId.Charisma,
+  },
   [MagicId.Intelligence]: {
     castStat: StatId.Intelligence,
   },
   [MagicId.Wisdom]: {
     castStat: StatId.Wisdom,
-  },
-  [MagicId.Charisma]: {
-    castStat: StatId.Charisma,
   },
 
   [MagicId.WitcherState]: {

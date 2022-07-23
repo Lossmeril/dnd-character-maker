@@ -2,6 +2,8 @@ import { EditorPane } from "./EditorPane";
 import PaneCard from "./PaneCard";
 import { ClassList } from "../../../datasets/computed/enumerator";
 import {
+  Avatar,
+  AvatarBadge,
   Box,
   Button,
   Divider,
@@ -9,6 +11,7 @@ import {
   Heading,
   HStack,
   Input,
+  Spacer,
   Text,
   useNumberInput,
   Wrap,
@@ -23,6 +26,7 @@ import {
   getAvailableProficiencies,
 } from "../../Character";
 import Bold from "../../Bold";
+import { MagicId } from "../../../datasets/Magic";
 
 type CardNumberInputProps = {
   value: number;
@@ -71,9 +75,17 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
       p={6}
       boxSizing="border-box"
     >
-      <Heading as="h6" size="lg">
-        {class_.name}
-      </Heading>
+      <Flex verticalAlign="middle">
+        <Heading as="h6" size="lg">
+          {class_.name}
+        </Heading>
+        <Spacer />
+        {class_.magic || class_.magic == 0 ? (
+          <Avatar size="sm" name="Magic" src="/icons/magic.png" />
+        ) : (
+          <Spacer />
+        )}
+      </Flex>
       <Divider />
       {class_.abilities.map(FindAbilityDetail).map((ability, i) => (
         <Box key={i} mt={4} ml={2}>

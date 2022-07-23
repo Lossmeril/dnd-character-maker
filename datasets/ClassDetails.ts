@@ -31,12 +31,14 @@ export const ClassDetails: { [key in ClassId]: Class } = {
     abilities: [AbilityId.Sing],
     availableProficiencies: [SkillId.History],
     availableSpecialAbilities: [SpecialAbilityId.EnchantingSong],
+    magic: MagicId.Seeing,
   },
   [ClassId.Monk]: {
     name: "Mnich",
     abilities: [AbilityId.Sing],
     availableProficiencies: [SkillId.History],
     availableSpecialAbilities: [SpecialAbilityId.EnchantingSong],
+    magic: MagicId.Ki,
   },
   [ClassId.Warrior]: {
     name: "Válečník",
@@ -64,6 +66,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.WarCry,
       SpecialAbilityId.ShieldBash,
     ],
+    magic: MagicId.Intelligence,
   },
   [ClassId.Mage]: {
     name: "Mág",
@@ -73,6 +76,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.WarCry,
       SpecialAbilityId.ShieldBash,
     ],
+    magic: MagicId.Intelligence,
   },
   [ClassId.Alchemist]: {
     name: "Alchymista",
@@ -82,6 +86,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.WarCry,
       SpecialAbilityId.ShieldBash,
     ],
+    magic: MagicId.Intelligence,
   },
   [ClassId.Druid]: {
     name: "Druid",
@@ -91,6 +96,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.WarCry,
       SpecialAbilityId.ShieldBash,
     ],
+    magic: MagicId.Intelligence,
   },
   [ClassId.Thief]: {
     name: "Zloděj",
@@ -109,6 +115,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.WarCry,
       SpecialAbilityId.ShieldBash,
     ],
+    magic: MagicId.WitcherState,
   },
   [ClassId.Priest]: {
     name: "Kněz",
@@ -118,6 +125,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.WarCry,
       SpecialAbilityId.ShieldBash,
     ],
+    magic: MagicId.Intelligence,
   },
   [ClassId.Inquisitor]: {
     name: "Inkvizitor",
@@ -127,5 +135,6 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.WarCry,
       SpecialAbilityId.ShieldBash,
     ],
+    magic: MagicId.Intelligence,
   },
 };
