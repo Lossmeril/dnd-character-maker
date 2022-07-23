@@ -1,4 +1,16 @@
 export enum ClassId {
-    Warrior,
-    Bard
+  Barbarian,
+  Bard,
+  Shaman,
+  Monk,
+  Warrior,
+  Ranger,
+  Wizzard,
+  Mage,
+  Alchemist,
+  Druid,
+  Thief,
+  Witcher,
+  Priest,
+  Inquisitor,
 }
