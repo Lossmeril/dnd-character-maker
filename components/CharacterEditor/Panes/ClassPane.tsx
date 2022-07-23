@@ -26,7 +26,6 @@ import {
   getAvailableProficiencies,
 } from "../../Character";
 import Bold from "../../Bold";
-import { MagicId } from "../../../datasets/Magic";
 
 type CardNumberInputProps = {
   value: number;
@@ -50,7 +49,7 @@ const CardNumberInput = ({ value, onChange }: CardNumberInputProps) => {
       <Button {...dec} onClick={() => onChange(value - 1)}>
         -
       </Button>
-      <Input {...input} />
+      <Input {...input} isReadOnly />
       <Button {...inc} onClick={() => onChange(value + 1)}>
         +
       </Button>
@@ -80,10 +79,25 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
           {class_.name}
         </Heading>
         <Spacer />
-        {class_.magic || class_.magic == 0 ? (
-          <Avatar size="sm" name="Magic" src="/icons/magic.png" />
+        {(class_.magic || class_.magic == 0) && class_.magic <= 2 ? (
+          <Avatar
+            size="sm"
+            src="/icons/magic.png"
+            ignoreFallback
+            bgColor="blue.200"
+          />
         ) : (
-          <Spacer />
+          <></>
+        )}
+        {class_.magic && class_.magic >= 3 ? (
+          <Avatar
+            size="sm"
+            src="/icons/magic.png"
+            ignoreFallback
+            bgColor="green.200"
+          />
+        ) : (
+          <></>
         )}
       </Flex>
       <Divider />
