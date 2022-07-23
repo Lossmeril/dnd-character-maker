@@ -2,12 +2,14 @@ import { ClassId } from "./Classes";
 import { AbilityId } from "./Ability";
 import { SkillId } from "./Skills";
 import { SpecialAbilityId } from "./SpecialAbility";
+import { MagicId } from "./Magic";
 
 export type Class = {
   name: string;
   abilities: AbilityId[];
   availableProficiencies: SkillId[];
   availableSpecialAbilities: SpecialAbilityId[];
+  magic?: MagicId;
 };
 
 export const ClassDetails: { [key in ClassId]: Class } = {
@@ -22,6 +24,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
     abilities: [AbilityId.Sing],
     availableProficiencies: [SkillId.History],
     availableSpecialAbilities: [SpecialAbilityId.EnchantingSong],
+    magic: MagicId.Charisma,
   },
   [ClassId.Shaman]: {
     name: "Šaman",
