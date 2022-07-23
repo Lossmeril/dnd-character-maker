@@ -1,17 +1,20 @@
 import { SexId } from "./Sex";
 
 type Sex = {
-    name: string
-}
+  name: string;
+};
 
 export const SexDetails: { [key in SexId]: Sex } = {
-    [SexId.NOT_SELECTED]: {
-        name: "Nevybráno"
-    },
-    [SexId.Male]: {
-        name: "Muž",
-    },
-    [SexId.Female]: {
-        name: "Žena"
-    }
-}
+  [SexId.NOT_SELECTED]: {
+    name: "Nevybráno",
+  },
+  [SexId.Male]: {
+    name: "Muž",
+  },
+  [SexId.Female]: {
+    name: "Žena",
+  },
+  [SexId.Other]: {
+    name: "Jiné",
+  },
+};
