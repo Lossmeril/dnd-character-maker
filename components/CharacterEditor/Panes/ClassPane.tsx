@@ -47,12 +47,12 @@ const CardNumberInput = ({ value, onChange }: CardNumberInputProps) => {
 
   return (
     <HStack maxW="240px">
-      <Button {...inc} onClick={() => onChange(value + 1)}>
-        +
-      </Button>
-      <Input {...input} />
       <Button {...dec} onClick={() => onChange(value - 1)}>
         -
+      </Button>
+      <Input {...input} />
+      <Button {...inc} onClick={() => onChange(value + 1)}>
+        +
       </Button>
     </HStack>
   );
