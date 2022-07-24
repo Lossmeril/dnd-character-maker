@@ -173,7 +173,7 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
         <ModalOverlay />
         <ModalContent overflow='hidden'>
           <Image
-            src={'./img/' + class_.name + '.jpg'}
+            src={'/img/' + class_.name + '.jpg'}
             alt={class_.name}
             w='100%'
             h='30vh'

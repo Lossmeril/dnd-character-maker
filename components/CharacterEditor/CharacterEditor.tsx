@@ -92,7 +92,6 @@ const CharacterEditor = ({
       </GridItem>
       <GridItem
         area='overview'
-        px={4}
         // @ts-ignore tis correct
         margin={{ base: null, md: 'auto' }}
       >
@@ -106,6 +105,7 @@ const CharacterEditor = ({
           allGood={allGood}
           onPhaseSelected={setCurrentPhase}
           onComplete={onComplete}
+          currentPhase={currentPhase}
         />
       </GridItem>
     </Grid>
