@@ -85,57 +85,67 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
         borderWidth='1px'
         borderRadius='lg'
         overflow='hidden'
-        p={6}
         boxSizing='border-box'
       >
-        <Flex verticalAlign='middle'>
-          <Heading as='h6' size='lg'>
-            {class_.name}
-          </Heading>
-          <Spacer />
-          {(class_.magic || class_.magic == 0) && class_.magic <= 2 ? (
-            <Tooltip
-              label='Uživatel magie'
-              hasArrow
-              arrowSize={5}
-              placement='top'
-            >
-              <Avatar
-                size='sm'
-                src='/icons/magic.png'
-                ignoreFallback
-                bgColor='blue.200'
-              />
-            </Tooltip>
-          ) : (
-            <></>
-          )}
-          {class_.magic && class_.magic >= 3 ? (
-            <Tooltip
-              label='Uživatel pseudo-magie'
-              hasArrow
-              arrowSize={5}
-              placement='top'
-            >
-              <Avatar
-                size='sm'
-                src='/icons/magic.png'
-                ignoreFallback
-                bgColor='green.200'
-              />
-            </Tooltip>
-          ) : (
-            <></>
-          )}
-        </Flex>
-        <Divider />
+        <Image
+          src={'./img/' + class_.name + '.jpg'}
+          alt={class_.name}
+          minW='100%'
+          h='15vh'
+          objectFit='cover'
+          objectPosition='top center'
+        />
+        <Box p={6}>
+          <Flex verticalAlign='middle'>
+            <Heading as='h6' size='lg'>
+              {class_.name}
+            </Heading>
+            <Spacer />
+            {(class_.magic || class_.magic == 0) && class_.magic <= 2 ? (
+              <Tooltip
+                label='Uživatel magie'
+                hasArrow
+                arrowSize={5}
+                placement='top'
+              >
+                <Avatar
+                  size='sm'
+                  src='/icons/magic.png'
+                  ignoreFallback
+                  bgColor='blue.200'
+                />
+              </Tooltip>
+            ) : (
+              <></>
+            )}
+            {class_.magic && class_.magic >= 3 ? (
+              <Tooltip
+                label='Uživatel pseudo-magie'
+                hasArrow
+                arrowSize={5}
+                placement='top'
+              >
+                <Avatar
+                  size='sm'
+                  src='/icons/magic.png'
+                  ignoreFallback
+                  bgColor='green.200'
+                />
+              </Tooltip>
+            ) : (
+              <></>
+            )}
+          </Flex>
 
-        <Box mt={4}>
-          <CardNumberInput
-            value={level}
-            onChange={onLevelChange}
-            onOpen={onOpen}
-          />
+          <Divider />
+
+          <Box mt={4}>
+            <CardNumberInput
+              value={level}
+              onChange={onLevelChange}
+              onOpen={onOpen}
+            />
+          </Box>
         </Box>
       </Box>
 
@@ -199,7 +209,6 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
                 <></>
               )}
             </Flex>
-            <Divider />
 
             <Divider />
 
