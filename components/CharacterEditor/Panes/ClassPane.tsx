@@ -23,6 +23,7 @@ import {
   useDisclosure,
   useNumberInput,
   Wrap,
+  Tooltip,
 } from '@chakra-ui/react';
 import {
   FindAbilityDetail,
@@ -93,22 +94,36 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
           </Heading>
           <Spacer />
           {(class_.magic || class_.magic == 0) && class_.magic <= 2 ? (
-            <Avatar
-              size='sm'
-              src='/icons/magic.png'
-              ignoreFallback
-              bgColor='blue.200'
-            />
+            <Tooltip
+              label='Uživatel magie'
+              hasArrow
+              arrowSize={5}
+              placement='top'
+            >
+              <Avatar
+                size='sm'
+                src='/icons/magic.png'
+                ignoreFallback
+                bgColor='blue.200'
+              />
+            </Tooltip>
           ) : (
             <></>
           )}
           {class_.magic && class_.magic >= 3 ? (
-            <Avatar
-              size='sm'
-              src='/icons/magic.png'
-              ignoreFallback
-              bgColor='green.200'
-            />
+            <Tooltip
+              label='Uživatel pseudo-magie'
+              hasArrow
+              arrowSize={5}
+              placement='top'
+            >
+              <Avatar
+                size='sm'
+                src='/icons/magic.png'
+                ignoreFallback
+                bgColor='green.200'
+              />
+            </Tooltip>
           ) : (
             <></>
           )}
@@ -150,22 +165,36 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
             <Divider />
             <Flex mt={2}>
               {(class_.magic || class_.magic == 0) && class_.magic <= 2 ? (
-                <Avatar
-                  size='sm'
-                  src='/icons/magic.png'
-                  ignoreFallback
-                  bgColor='blue.200'
-                />
+                <Tooltip
+                  label='Uživatel magie'
+                  hasArrow
+                  arrowSize={5}
+                  placement='top'
+                >
+                  <Avatar
+                    size='sm'
+                    src='/icons/magic.png'
+                    ignoreFallback
+                    bgColor='blue.200'
+                  />
+                </Tooltip>
               ) : (
                 <></>
               )}
               {class_.magic && class_.magic >= 3 ? (
-                <Avatar
-                  size='sm'
-                  src='/icons/magic.png'
-                  ignoreFallback
-                  bgColor='green.200'
-                />
+                <Tooltip
+                  label='Uživatel pseudo-magie'
+                  hasArrow
+                  arrowSize={5}
+                  placement='top'
+                >
+                  <Avatar
+                    size='sm'
+                    src='/icons/magic.png'
+                    ignoreFallback
+                    bgColor='green.200'
+                  />
+                </Tooltip>
               ) : (
                 <></>
               )}
