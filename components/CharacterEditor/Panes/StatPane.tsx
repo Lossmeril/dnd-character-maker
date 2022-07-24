@@ -53,15 +53,49 @@ const StatSlider = ({ statId, character, onStatChange }: StatSliderProps) => {
   return (
     <Box>
       <Flex justifyContent='space-between'>
-        <Heading as='h4' fontSize='1.2em'>
-          {stat.name}
-        </Heading>
-        <Text>
-          <Bold>
-            {resultStatValue} (
-            {statModifier >= 0 ? `+${statModifier}` : `${statModifier}`})
-          </Bold>
-        </Text>
+        <Box>
+          <Heading as='h4' fontSize='1.2em'>
+            {stat.name}
+          </Heading>
+
+          <Text mt={2}>
+            {stat.name !== 'Odolnost'
+              ? stat.name +
+                ' ovlivňuje činnosti jako: ' +
+                stat.skills.map((skill) => ' ' + FindSkillDetail(skill).name)
+              : 'Odolnost ovlivňuje zdraví postavy'}
+          </Text>
+        </Box>
+        <Flex>
+          <Tooltip label='Výše statu' hasArrow arrowSize={5} placement='top'>
+            <Center
+              w='40px'
+              h='40px'
+              bgColor='blue.500'
+              borderWidth='1px'
+              borderRadius='lg'
+              mx={1}
+            >
+              <Bold>{resultStatValue}</Bold>
+            </Center>
+          </Tooltip>
+
+          <Tooltip label='Bonus k hodu' hasArrow arrowSize={5} placement='top'>
+            <Center
+              w='40px'
+              h='40px'
+              bgColor='blue.200'
+              color='blackAlpha.800'
+              borderWidth='1px'
+              borderRadius='lg'
+              mx={1}
+            >
+              <Bold>
+                ({statModifier >= 0 ? `+${statModifier}` : `${statModifier}`})
+              </Bold>
+            </Center>
+          </Tooltip>
+        </Flex>
       </Flex>
       <Slider
         mt={2}
@@ -90,13 +124,7 @@ const StatSlider = ({ statId, character, onStatChange }: StatSliderProps) => {
           <SliderThumb />
         </Tooltip>
       </Slider>
-      <Text mt={2}>
-        {stat.name !== 'Odolnost'
-          ? stat.name +
-            ' ovlivňuje činnosti jako: ' +
-            stat.skills.map((skill) => ' ' + FindSkillDetail(skill).name)
-          : 'Odolnost ovlivňuje zdraví postavy'}
-      </Text>
+
       <Divider my={4} />
     </Box>
   );
