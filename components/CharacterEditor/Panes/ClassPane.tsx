@@ -159,11 +159,11 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
           <ModalHeader></ModalHeader>
           <ModalCloseButton bgColor='whiteAlpha.500' />
           <ModalBody>
-            <Heading as='h6' size='lg'>
-              {class_.name}
-            </Heading>
-            <Divider />
-            <Flex mt={2}>
+            <Flex verticalAlign='middle'>
+              <Heading as='h6' size='lg'>
+                {class_.name}
+              </Heading>
+              <Spacer />
               {(class_.magic || class_.magic == 0) && class_.magic <= 2 ? (
                 <Tooltip
                   label='Uživatel magie'
@@ -199,6 +199,10 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
                 <></>
               )}
             </Flex>
+            <Divider />
+
+            <Divider />
+
             {class_.abilities.map(FindAbilityDetail).map((ability, i) => (
               <Box key={i} mt={4} ml={2}>
                 <Text fontWeight='bold'>{ability.name}</Text>
