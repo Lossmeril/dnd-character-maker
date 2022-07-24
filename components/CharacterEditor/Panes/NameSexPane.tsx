@@ -1,4 +1,4 @@
-import { EditorPane } from "./EditorPane";
+import { EditorPane } from './EditorPane';
 import {
   Box,
   FormControl,
@@ -9,12 +9,12 @@ import {
   Icon,
   Input,
   useRadioGroup,
-} from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { SexId } from "../../../datasets/Sex";
-import RadioCard from "../../Util/RadioCard";
-import { MdFemale, MdMale, MdTransgender } from "react-icons/md";
-import PaneCard from "./PaneCard";
+} from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { SexId } from '../../../datasets/Sex';
+import RadioCard from '../../Util/RadioCard';
+import { MdFemale, MdMale, MdTransgender } from 'react-icons/md';
+import PaneCard from './PaneCard';
 
 type SexSelectProps = {
   currentSex: SexId;
@@ -22,7 +22,7 @@ type SexSelectProps = {
 };
 const SexSelect = ({ currentSex, onSexChanged }: SexSelectProps) => {
   const { getRootProps, getRadioProps, setValue } = useRadioGroup({
-    name: "character sex",
+    name: 'character sex',
     defaultValue: currentSex.toString(),
     onChange: (newVal) => onSexChanged(parseInt(newVal)),
   });
@@ -66,13 +66,13 @@ const NameSexPane: EditorPane = ({
     onCharacterModified({ ...character, sex: newSex });
 
   return (
-    <PaneCard title="Sex && Name" onNavigateForward={onNavigateForward}>
+    <PaneCard title='Sex && Name' onNavigateForward={onNavigateForward}>
       <FormControl>
-        <FormLabel htmlFor="name">Name</FormLabel>
+        <FormLabel htmlFor='name'>Name</FormLabel>
         <Input
-          id="name"
-          type="text"
-          placeholder="Let the journey begin!"
+          id='name'
+          type='text'
+          placeholder='Let the journey begin!'
           value={character.name}
           onChange={(e) => setName(e.target.value)}
         />
