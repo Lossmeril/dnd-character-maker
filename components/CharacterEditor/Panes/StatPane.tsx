@@ -1,15 +1,18 @@
-import { EditorPane } from "./EditorPane";
-import PaneCard from "./PaneCard";
+import { EditorPane } from './EditorPane';
+import PaneCard from './PaneCard';
 import {
   FindRaceDetail,
+  FindSkillDetail,
   FindStatDetail,
-} from "../../../datasets/computed/details";
-import { StatList } from "../../../datasets/computed/enumerator";
+} from '../../../datasets/computed/details';
+import { StatList } from '../../../datasets/computed/enumerator';
 import {
   Box,
   Button,
   Center,
+  Divider,
   Flex,
+  Heading,
   Slider,
   SliderFilledTrack,
   SliderThumb,
@@ -17,8 +20,8 @@ import {
   Stack,
   Text,
   Tooltip,
-} from "@chakra-ui/react";
-import { StatId } from "../../../datasets/Stats";
+} from '@chakra-ui/react';
+import { StatId } from '../../../datasets/Stats';
 import {
   calculateDistributedPoints,
   calculateResultStatValue,
@@ -26,10 +29,10 @@ import {
   CHARACTER_BASE_DISTRIBUTABLE_POINTS,
   DEFAULT_STAT_VALUE,
   defaultStatMap,
-} from "../../Character";
-import Bold from "../../Bold";
-import { useState } from "react";
-import { CalculateStatModifier, GetStatPointCost } from "../../StatUtil";
+} from '../../Character';
+import Bold from '../../Bold';
+import { useState } from 'react';
+import { CalculateStatModifier, GetStatPointCost } from '../../StatUtil';
 
 type StatSliderProps = {
   statId: StatId;
@@ -49,8 +52,10 @@ const StatSlider = ({ statId, character, onStatChange }: StatSliderProps) => {
 
   return (
     <Box>
-      <Flex justifyContent="space-between">
-        <Text>{stat.name}</Text>
+      <Flex justifyContent='space-between'>
+        <Heading as='h4' fontSize='1.2em'>
+          {stat.name}
+        </Heading>
         <Text>
           <Bold>
             {resultStatValue} (
@@ -59,11 +64,13 @@ const StatSlider = ({ statId, character, onStatChange }: StatSliderProps) => {
         </Text>
       </Flex>
       <Slider
+        mt={2}
         step={1}
+        size='lg'
         min={8}
         max={15}
         value={statValue}
-        colorScheme="teal"
+        colorScheme='blue'
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
         onChange={onStatChange}
@@ -74,15 +81,23 @@ const StatSlider = ({ statId, character, onStatChange }: StatSliderProps) => {
         <SliderThumb />
         <Tooltip
           hasArrow
-          bg="teal.500"
-          color="white"
-          placement="top"
+          bg='blue.200'
+          color='black'
+          placement='top'
           isOpen={showTooltip}
           label={`${statValue}`}
         >
           <SliderThumb />
         </Tooltip>
       </Slider>
+      <Text mt={2}>
+        {stat.name !== 'Odolnost'
+          ? stat.name +
+            ' ovlivňuje činnosti jako: ' +
+            stat.skills.map((skill) => ' ' + FindSkillDetail(skill).name)
+          : 'Odolnost ovlivňuje zdraví postavy'}
+      </Text>
+      <Divider my={4} />
     </Box>
   );
 };
@@ -129,7 +144,7 @@ const StatPane: EditorPane = ({
 
   return (
     <PaneCard
-      title="Stats"
+      title='Stats'
       onNavigateBack={onNavigateBack}
       onNavigateForward={onNavigateForward}
     >
@@ -141,12 +156,12 @@ const StatPane: EditorPane = ({
           onStatChange={changeStat(statId)}
         ></StatSlider>
       ))}
-      <Flex justifyContent="space-between" mt={4}>
+      <Flex justifyContent='space-between' mt={4}>
         <Text>
           Zbývající body:
           <Bold> {totalDistributablePoints - alreadyDistributedPoints}</Bold>
         </Text>
-        <Button onClick={resetStats} colorScheme="red">
+        <Button onClick={resetStats} colorScheme='red'>
           Reset
         </Button>
       </Flex>
