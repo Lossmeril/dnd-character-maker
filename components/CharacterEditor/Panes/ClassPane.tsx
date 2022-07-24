@@ -56,15 +56,12 @@ const CardNumberInput = ({ value, onChange, onOpen }: CardNumberInputProps) => {
 
   return (
     <HStack maxW='240px'>
-      <Button {...dec} onClick={() => onChange(value - 1)} width='10%'>
+      <Button {...dec} onClick={() => onChange(value - 1)}>
         -
       </Button>
-      <Input {...input} isReadOnly width='25%' />
-      <Button {...inc} onClick={() => onChange(value + 1)} width='10%'>
+      <Input {...input} isReadOnly />
+      <Button {...inc} onClick={() => onChange(value + 1)}>
         +
-      </Button>
-      <Button onClick={onOpen} width='55%'>
-        Detaily
       </Button>
     </HStack>
   );
@@ -86,7 +83,13 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
         borderRadius='lg'
         overflow='hidden'
         boxSizing='border-box'
-        w='24%'
+        bgColor='#1e1e1e'
+        w={{ base: '100%', sm: '47%', xl: '31%', '2xl': '24%' }}
+        style={{ transition: 'all 0.2s linear' }}
+        _hover={{
+          boxShadow: '0px 0px 10px #',
+          transition: 'all 0.2s linear',
+        }}
       >
         <Image
           src={'/img/' + class_.name + '.jpg'}
@@ -95,6 +98,10 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
           h='15vh'
           objectFit='cover'
           objectPosition='top center'
+          onClick={onOpen}
+          _hover={{
+            cursor: 'pointer',
+          }}
         />
         <Box p={6}>
           <Flex verticalAlign='middle'>
@@ -138,11 +145,15 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
             )}
           </Flex>
 
-          <Divider />
+          <Divider my={2} />
           <Text my={3} fontFamily='Crimson' fontSize='0.90em' lineHeight='1em'>
             {class_.shortDesc}
           </Text>
-          <Box mt={4}>
+          <Button onClick={onOpen} w='100%'>
+            Detaily
+          </Button>
+          <Divider my={2} />
+          <Box>
             <CardNumberInput
               value={level}
               onChange={onLevelChange}
