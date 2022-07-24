@@ -83,7 +83,7 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
         borderRadius='lg'
         overflow='hidden'
         boxSizing='border-box'
-        bgColor='#1e1e1e'
+        bgColor={level > 0 ? '#0D3340' : '#1e1e1e'}
         w={{ base: '100%', sm: '47%', xl: '31%', '2xl': '24%' }}
         style={{ transition: 'all 0.2s linear' }}
         _hover={{
@@ -285,6 +285,10 @@ const ClassPane: EditorPane = ({
       onNavigateBack={onNavigateBack}
       onNavigateForward={onNavigateForward}
     >
+      <Text mb={3}>
+        Zbývající body:
+        <Bold> {character.level - spentPoints}</Bold>
+      </Text>
       <Wrap direction={{ base: 'column', sm: 'row' }} gap={4}>
         {ClassList.map((classId) => {
           const currentLevel = character.classes[classId as ClassId];
@@ -299,10 +303,6 @@ const ClassPane: EditorPane = ({
           );
         })}
       </Wrap>
-      <Text mt={4}>
-        Zbývající body:
-        <Bold> {character.level - spentPoints}</Bold>
-      </Text>
     </PaneCard>
   );
 };
