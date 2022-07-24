@@ -86,6 +86,7 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
         borderRadius='lg'
         overflow='hidden'
         boxSizing='border-box'
+        w='24%'
       >
         <Image
           src={'./img/' + class_.name + '.jpg'}
@@ -138,7 +139,9 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
           </Flex>
 
           <Divider />
-
+          <Text my={3} fontFamily='Crimson' fontSize='0.90em' lineHeight='1em'>
+            {class_.shortDesc}
+          </Text>
           <Box mt={4}>
             <CardNumberInput
               value={level}

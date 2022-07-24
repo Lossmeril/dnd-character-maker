@@ -16,7 +16,7 @@ const Fonts = () => {
             font-style: normal;
           }
           
-        @font-face {
+          @font-face {
             font-family: "Crimson";
             src: url("/fonts/Crimson-Bold.otf");
             font-weight: bold;
