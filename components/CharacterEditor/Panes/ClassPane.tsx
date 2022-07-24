@@ -89,7 +89,7 @@ const ClassCard = ({ classId, level, onLevelChange }: ClassCardProps) => {
         w='24%'
       >
         <Image
-          src={'./img/' + class_.name + '.jpg'}
+          src={'/img/' + class_.name + '.jpg'}
           alt={class_.name}
           minW='100%'
           h='15vh'
