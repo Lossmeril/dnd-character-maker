@@ -25,15 +25,20 @@ export const CalcultateLevelHitPoint = (
   }
 };
 
-export const CalculateHpForClass = (
-  hitDie: number,
-  level: number,
+export const CalculateHp = (
+  levelTable: [string, number[], number][],
   constitution: number
 ): number => {
   var total = 0;
 
-  for (var i = 1; i <= level; i++) {
-    total += CalcultateLevelHitPoint(hitDie, i) + constitution;
+  for (var i = 0; i < levelTable.length; i++) {
+    for (var j = 0; j < levelTable[i][1].length; j++) {
+      total +=
+        CalcultateLevelHitPoint(levelTable[i][2], levelTable[i][1][j]) +
+        constitution;
+
+      console.log();
+    }
   }
 
   return total;
