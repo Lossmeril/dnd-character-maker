@@ -14,6 +14,8 @@ export type Class = {
   availableProficiencies: SkillId[];
   availableSpecialAbilities: SpecialAbilityId[];
   magic?: MagicId;
+
+  hitDie: number;
 };
 
 export const ClassDetails: { [key in ClassId]: Class } = {
@@ -25,6 +27,8 @@ export const ClassDetails: { [key in ClassId]: Class } = {
     savingThrowProficiency: [StatId.Strength, StatId.Constitution],
     availableProficiencies: [SkillId.History],
     availableSpecialAbilities: [SpecialAbilityId.EnchantingSong],
+
+    hitDie: 12,
   },
   [ClassId.Bard]: {
     name: 'Bard',
@@ -35,6 +39,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
     availableProficiencies: [SkillId.History],
     availableSpecialAbilities: [SpecialAbilityId.EnchantingSong],
     magic: MagicId.Charisma,
+    hitDie: 8,
   },
   [ClassId.Shaman]: {
     name: 'Šaman',
@@ -45,6 +50,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
     availableProficiencies: [SkillId.History],
     availableSpecialAbilities: [SpecialAbilityId.EnchantingSong],
     magic: MagicId.Seeing,
+    hitDie: 8,
   },
   [ClassId.Monk]: {
     name: 'Mnich',
@@ -55,6 +61,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
     availableProficiencies: [SkillId.History],
     availableSpecialAbilities: [SpecialAbilityId.EnchantingSong],
     magic: MagicId.Ki,
+    hitDie: 8,
   },
   [ClassId.Warrior]: {
     name: 'Válečník',
@@ -66,6 +73,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.WarCry,
       SpecialAbilityId.ShieldBash,
     ],
+    hitDie: 10,
   },
   [ClassId.Ranger]: {
     name: 'Hraničář',
@@ -78,6 +86,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.WarCry,
       SpecialAbilityId.ShieldBash,
     ],
+    hitDie: 10,
   },
   [ClassId.Wizzard]: {
     name: 'Čaroděj',
@@ -90,6 +99,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.ShieldBash,
     ],
     magic: MagicId.Intelligence,
+    hitDie: 10,
   },
   [ClassId.Mage]: {
     name: 'Mág',
@@ -103,6 +113,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.ShieldBash,
     ],
     magic: MagicId.Charisma,
+    hitDie: 8,
   },
   [ClassId.Alchemist]: {
     name: 'Alchymista',
@@ -116,6 +127,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.ShieldBash,
     ],
     magic: MagicId.Intelligence,
+    hitDie: 10,
   },
   [ClassId.Druid]: {
     name: 'Druid',
@@ -129,6 +141,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.ShieldBash,
     ],
     magic: MagicId.Wisdom,
+    hitDie: 8,
   },
   [ClassId.Thief]: {
     name: 'Zloděj',
@@ -141,6 +154,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.WarCry,
       SpecialAbilityId.ShieldBash,
     ],
+    hitDie: 8,
   },
   [ClassId.Witcher]: {
     name: 'Vědmák',
@@ -154,6 +168,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.ShieldBash,
     ],
     magic: MagicId.WitcherState,
+    hitDie: 10,
   },
   [ClassId.Priest]: {
     name: 'Kněz',
@@ -167,6 +182,7 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.ShieldBash,
     ],
     magic: MagicId.Wisdom,
+    hitDie: 6,
   },
   [ClassId.Inquisitor]: {
     name: 'Inkvizitor',
@@ -180,5 +196,6 @@ export const ClassDetails: { [key in ClassId]: Class } = {
       SpecialAbilityId.ShieldBash,
     ],
     magic: MagicId.Intelligence,
+    hitDie: 10,
   },
 };

@@ -17,6 +17,7 @@ import ProficiencyPane from './Panes/ProficiencyPane';
 import OverviewPane from './Panes/OverviewPane';
 import NOT_SELECTED_ID from '../../datasets/NotSelected';
 import SpecialAbilityPane from './Panes/SpecialAbilityPane';
+import HPPane from './Panes/HPPane';
 
 type CharacterEditorProps = {
   character: Character;
@@ -39,6 +40,7 @@ const CharacterEditor = ({
     [CharacterEditorPhase.NameSex]: NameSexPane,
     [CharacterEditorPhase.Race]: RacePane,
     [CharacterEditorPhase.Class]: ClassPane,
+    [CharacterEditorPhase.HP]: HPPane,
     [CharacterEditorPhase.Stat]: StatPane,
     [CharacterEditorPhase.Proficiency]: ProficiencyPane,
     [CharacterEditorPhase.SpecialAbilities]: SpecialAbilityPane,
@@ -53,6 +55,7 @@ const CharacterEditor = ({
       CHARACTER_BASE_DISTRIBUTABLE_POINTS ===
     0;
   const classGood = calculateSpentClassPoints(character) == character.level;
+  const HPGood = true;
   const proficiencyGood = character.proficiencies.length == character.level;
   const specialAbilitiesGood =
     character.specialAbilities.length == character.level;
@@ -61,6 +64,7 @@ const CharacterEditor = ({
     raceGood &&
     statsGood &&
     classGood &&
+    HPGood &&
     proficiencyGood &&
     specialAbilitiesGood;
 
@@ -100,6 +104,7 @@ const CharacterEditor = ({
           raceGood={raceGood}
           statsGood={statsGood}
           classGood={classGood}
+          hpGood={HPGood}
           proficiencyGood={proficiencyGood}
           specialAbilitiesGood={specialAbilitiesGood}
           allGood={allGood}

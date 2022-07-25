@@ -49,6 +49,7 @@ const CharacterOverview = ({ character }: CharacterOverviewProps) => {
         {FindRaceDetail(character.race).name}
       </OverviewField>
       <OverviewField label='Úroveň'>{character.level}</OverviewField>
+      <OverviewField label='HP'>{character.hp}</OverviewField>
       <OverviewField label='Povolání'>
         {_(character.classes)
           .entries()
